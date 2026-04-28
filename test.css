@@ -1,0 +1,107 @@
+h1{
+    background-color:#FFFFFF;
+    text-align: center;
+    color: #111827;
+    vertical-align: middle;
+    font-size: 30px;
+    width: 89%;
+    padding: 25px;
+    border-radius: 5px;
+}
+body{
+    background-image: url();
+    background-color:#4e91a6;
+    margin: 0;
+    padding: 20px;
+    box-sizing: border-box;
+}
+nav{background-color: rgb(132, 215, 131);
+    text-align:left;
+    width: 70%;
+    margin: auto;
+    padding: 20px;
+    border-radius: 10px;
+    border: 5px solid green;
+}
+
+ a {
+  text-decoration: none;
+  margin: 15px;
+  color: rgb(239, 237, 237);
+  font-weight: bold;
+  border: 2px solid black;
+  border-radius: 10px;
+  padding: 10px;
+}
+a:hover {
+    background-color: rgb(48, 48, 48);
+  color: rgb(229, 214, 182);
+}
+p{
+    text-align: center;
+    vertical-align: middle;
+    font-size: 20px;
+    padding: 20px;
+}
+legend{
+    text-align: center;
+    vertical-align: middle;
+    font-size: 25px;
+}
+fieldset{
+    width:70;
+    margin: auto;
+    padding: 30px;
+    border-radius: 10px;
+    border: 5px solid black;
+    text-align: center;
+
+}
+input{
+    width: 50%;
+    padding: 10px;
+    margin: 15px 0;
+    border-radius: 6px;
+    border: 1px solid #272222;
+    background-color: rgb(244, 246, 242);
+}
+button{
+    border: none;
+    padding: 10px 20px;
+    border-radius: 10px;
+    font-size: 16px;
+    cursor: pointer;
+}
+button:hover {
+    background-color: rgb(249, 249, 251);
+    color: rgb(60, 60, 62);
+}
+.container {
+  display: flex;
+  gap: 5px;
+}
+
+.box {
+    color: white;
+  border: 3px solid rgb(88, 87, 87);
+  padding: 40px;
+  width: 40%;
+  background-color: rgb(119, 237, 129);
+  text-align: center;
+  border-radius: 20px;
+}
+box:hover {
+    background-color: rgb(88, 87, 87);
+    color: rgb(119, 237, 129);
+    cursor: pointer;
+}
+footer{
+    text-align: center;
+    color: #62ecb3;
+    vertical-align: middle;
+    font-size: 20px;
+    width: 100%;
+    padding: 25px;
+    border-radius: 5px;
+
+}
