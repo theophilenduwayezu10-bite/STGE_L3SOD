@@ -1,29 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="home.css">
-    <title>student</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="home.css">
+<title>Student</title>
 </head>
 <body>
-    <h1>WELCOME AS STUDENT ON CLASS MANAGEMENT SYSTEM</h1>
 
+<h3>WELCOME AS STUDENT ON CLASS MANAGEMENT SYSTEM</h3>
 
-    <nav>
-        <a href="home.html">HOME</a>
-        <a href="student.html">STUDENTS</a>
-        <a href="teachers.html">TEACHERS</a>
-        <a href="classes.html">CLASSES</a>
-        <a href="marks.html">MARKS</a>
-        <a href="attendance.html">ATTENDANCE</a>
-    </nav>
-    <fieldset><legend>Student Information</legend>
-        <p>when you couldn't enter you name you must not go to next to access the next page</p><br>
-        <br>
+<nav>
+  <a href="home.html">HOME</a>
+  <a href="student.html">STUDENTS</a>
+  <a href="teachers.html">TEACHERS</a>
+  <a href="classes.html">CLASSES</a>
+  <a href="marks.html">MARKS</a>
+  <a href="attendance.html">ATTENDANCE</a>
+</nav>
+
+<fieldset>
+<legend>Student Information</legend>
+
+<p>You must enter your name to access the next page</p>
+
 <input type="text" id="name" placeholder="Enter your name" required>
-<h2>you must enter your name to access the next page</h2>
+<br><br>
 
 <button onclick="checkStudent()">NEXT</button>
 
@@ -31,24 +33,26 @@
 
 <script>
 function checkStudent() {
-  let name = document.getElementById("name").value.toLowerCase();
+  let name = document.getElementById("name").value.toLowerCase().trim();
 
-  if (
-    name === "theophile" || name === "emile" || name === "dan" ||
-    name === "sumaya" || name === "josiane" || name === "gikundiro" ||
-    name === "sandrine" || name === "claire" || name === "augustin" ||
-    name === "vradmir" || name === "manishimwe" || name === "nduwayezu" ||
-    name === "eric" || name === "theodethe" || name === "nadia" ||
-    name === "evaliste" || name === "beulla" || name === "hamiss" ||
-    name === "marieleine" || name === "daphine" || name === "lydia" ||
-    name === "ange" || name === "christian" || name === "danny" || name === "edouige"
-  ) {
+  const students = [
+    "theophile","emile","dan","sumaya","josiane","gikundiro",
+    "sandrine","claire","augustin","vradmir","manishimwe",
+    "nduwayezu","eric","theodethe","nadia","evaliste","beulla",
+    "hamiss","marieleine","daphine","lydia","ange","christian",
+    "danny","edouige","teta","liliane"
+  ];
+
+  if (students.includes(name)) {
     window.location.href = "next.html";
   } else {
-    document.getElementById("result").innerText = "you are not a student of level 3 sod please try again";
+    document.getElementById("result").innerText =
+      "You are not a student of level 3 SOD, please try again.";
   }
 }
 </script>
-    </fieldset>
 
+</fieldset>
+
+</body>
 </html>

@@ -1,96 +1,141 @@
-body {
-    margin: 0;
-    padding: 0;
-    font-family: Arial, sans-serif;
-
-    /* Cloud background */
-    background-image: url("clouds.jpg");
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
-}
-
-/* Title */
-h1 {
+h1{
+    color: rgb(242, 242, 248);
     text-align: center;
-    color: white;
-    background: rgba(0, 80, 180, 0.6);
-    margin: 0;
-    padding: 20px;
+    font-size: 2em;
+    border-bottom: 2px solid rgb(45, 95, 233);
+    padding-bottom: 10px;
+    margin: 20px;
+    width: 100%;
+    border-radius:1%;
+}
+h1:hover {
+    background-color: rgb(51, 86, 163);
+    color: rgb(249, 246, 246);
+    transition: background-color 5.3s ease, color 4.3s ease;
+}
+header {
+    background-image:url(https://cdn.pixabay.com/photo/2016/11/29/03/53/school-1869716_960_720.jpg);
 }
 
-/* Navigation */
 nav {
-    text-align: center;
-    padding: 15px;
-    background: rgba(255, 255, 255, 0.2);
-    backdrop-filter: blur(10px);
-}
-
-nav a {
-    color: rgb(144, 177, 205);
-    text-decoration: none;
-    margin: 10px;
-    font-weight: bold;
-}
-
-nav a:hover {
-    color: yellow;
-}
-
-/* Text */
-.intro, .welcome {
-    text-align: center;
-    color: white;
-    font-size: 18px;
-}
-
-/* STUDENTS GRID */
-.container {
     display: flex;
     justify-content: center;
-    flex-wrap: wrap;
-    gap: 20px;
-    margin-top: 30px;
-}
-
-/* Student cards */
-.box {
-    width: 220px;
-    background: rgba(255,255,255,0.2);
-    border-radius: 15px;
-    overflow: hidden;
-    text-align: center;
-    backdrop-filter: blur(10px);
-    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-    transition: 0.3s;
-}
-
-.box:hover {
-    transform: scale(1.05);
-}
-
-.box img {
+    margin: 20px;
+    border: 1px solid rgb(87, 90, 96);
+    border-radius: 6px;
+    background-color: rgb(206, 213, 228);
+    padding:    10px;
     width: 100%;
-    height: 220px;
-    object-fit: cover;
 }
-
-.box h3 {
-    color: white;
-    margin: 10px 0;
-}
-
-/* Footer */
-footer {
-    margin-top: 40px;
-    text-align: center;
-    color: white;
-    background: rgba(0,0,0,0.4);
-    padding: 15px;
-}
-
-footer a {
-    color: yellow;
+nav a {
+    margin: 0 15px;
     text-decoration: none;
+    color: rgb(36, 36, 44);
+    font-size: 1.2em;
+    font-weight: bold;
+    border: 1px solid rgb(87, 90, 96);
+    border-radius: 6px;
+    padding:    10px 20px;
+}
+ a:hover {
+    background-color: rgb(25, 26, 27);
+    color: rgb(249, 246, 246);
+    transition: background-color 1.3s ease, color 1.3s ease;
+}
+body {
+
+    justify-content: center;  
+    align-items: center;                   
+    margin: 0;
+    vertical-align: middle;
+    background-color: white;
+    padding: 30;
+    background-color: rgb(250, 246, 246);
+    margin-left: auto;
+    margin-right: auto;
+}
+section {
+    align-items: center;
+    width: 80%;
+    text-align: center;
+    font-size: 1.2em;
+    margin: 20px auto;
+    color: rgb(194, 236, 43);
+}
+section:hover {
+    color: rgb(14, 7, 59);
+    transition: background-color 1.3s ease, color 1.3s ease;
+}
+h3{
+    font-size: 1.2em;
+    color: rgb(36, 36, 44);
+    text-align: center;
+    border-radius: 6px;
+    padding: 10px;
+    border: 1px solid rgb(87, 90, 96);
+    width: 60%;
+    border-align: center;
+    margin: 20px auto;
+}
+    h3:hover {
+        background-color: rgb(27, 65, 170);
+        color: rgb(249, 246, 246);
+        transition: background-color 1.3s ease, color 1.3s ease;
+    }
+    fieldset {
+        border: 1px solid rgb(87, 90, 96);
+        border-radius: 6px;
+        padding: 20px;
+        margin: 20px auto;
+        width: 50%;
+        background-color: rgb(241, 244, 249);
+    }
+    fieldset:hover {
+        background-color: rgb(140, 169, 213);
+        color: rgb(249, 246, 246);
+        transition: background-color 3.3s ease, color 3.3s ease;
+    }
+    h2{
+        font-size: 1.5em;
+        color: rgb(36, 36, 44);
+        text-align: center;
+        border-radius: 6px;
+        padding: 10px;
+        border: 1px solid rgb(87, 90, 96);
+        width: 50%;
+        margin: 20px auto;
+    }
+    h2:hover {
+        background-color: rgb(156, 180, 247);
+        color: rgb(249, 246, 246);
+        transition: background-color 1.3s ease, color 1.3s ease;
+    }
+
+footer {
+    background-color: rgb(234, 234, 239);
+    color: rgb(18, 15, 39);
+    text-align: center;
+    padding: 20px;
+    margin-top: 30px;
+    border-top: 2px solid rgb(45, 95, 233);
+}
+
+footer a:hover {
+    background-color: rgb(117, 133, 143);
+    color: rgb(249, 246, 246);
+    transition: color 0.3s ease;
+}
+button {
+    background-color: rgb(36, 36, 44);
+    color: rgb(249, 246, 246);
+    border: none;
+    border-radius: 6px;
+    padding: 10px 20px;
+    font-size: 1em;
+    cursor: pointer;
+}
+button:hover {
+    background-color: rgb(51, 86, 163);
+    color: rgb(249, 246, 246);
+    transition: background-color 0.3s ease, color 0.3s ease;
 }

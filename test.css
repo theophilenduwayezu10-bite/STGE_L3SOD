@@ -76,25 +76,7 @@ button:hover {
     background-color: rgb(249, 249, 251);
     color: rgb(60, 60, 62);
 }
-.container {
-  display: flex;
-  gap: 5px;
-}
 
-.box {
-    color: white;
-  border: 3px solid rgb(88, 87, 87);
-  padding: 40px;
-  width: 40%;
-  background-color: rgb(119, 237, 129);
-  text-align: center;
-  border-radius: 20px;
-}
-box:hover {
-    background-color: rgb(88, 87, 87);
-    color: rgb(119, 237, 129);
-    cursor: pointer;
-}
 footer{
     text-align: center;
     color: #62ecb3;

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ranking System</title>
+<style>
+body{
+  font-family: Arial;
+  background:#f4f6f9;
+  text-align:center;
+}
+
+h2{
+  background:black;
+  color:white;
+  padding:15px;
+  margin:0;
+}
+
+.container{
+  width:90%;
+  margin:20px auto;
+  background:white;
+  padding:20px;
+  border-radius:10px;
+  box-shadow:0 0 10px rgba(0,0,0,0.1);
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+  margin-top:20px;
+}
+
+th,td{
+  border:1px solid #ccc;
+  padding:10px;
+}
+
+th{
+  background:#333;
+  color:white;
+}
+
+.rank1{background:gold;}
+.rank2{background:silver;}
+.rank3{background:#cd7f32;}
+</style>
+</head>
+<body>
+
+<h2>🏆 LEVEL 3 SOD - STUDENT RANKING SYSTEM</h2>
+
+<div class="container">
+
+<button onclick="showRanking()">LOAD RANKING</button>
+
+<table>
+<thead>
+<tr>
+<th>Rank</th>
+<th>Name</th>
+<th>JS</th>
+<th>Web</th>
+<th>SE</th>
+<th>DB</th>
+<th>Average</th>
+</tr>
+</thead>
+<tbody id="table"></tbody>
+</table>
+
+</div>
+
+<script>
+let data = JSON.parse(localStorage.getItem("marks")) || [];
+
+function showRanking(){
+
+  // sort by average descending
+  data.sort((a,b)=> b.average - a.average);
+
+  let table = document.getElementById("table");
+  table.innerHTML = "";
+
+  data.forEach((s,index)=>{
+
+    let rank = index + 1;
+    let rowClass = "";
+
+    if(rank === 1) rowClass = "rank1";
+    else if(rank === 2) rowClass = "rank2";
+    else if(rank === 3) rowClass = "rank3";
+
+    table.innerHTML += `
+      <tr class="${rowClass}">
+        <td>${rank}</td>
+        <td>${s.name}</td>
+        <td>${s.js}</td>
+        <td>${s.web}</td>
+        <td>${s.se}</td>
+        <td>${s.db}</td>
+        <td>${s.average}</td>
+      </tr>
+    `;
+
+  });
+
+}
+
+showRanking();
+</script>
+
+</body>
+</html>
