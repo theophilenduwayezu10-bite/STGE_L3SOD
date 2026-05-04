@@ -1,0 +1,107 @@
+/* ===== BODY ===== */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #ffffff;
+    color: #111827;
+}
+
+/* ===== HEADER ===== */
+.header {
+    background: #0f172a;
+    color: white;
+    padding: 15px 20px;
+}
+
+/* ===== TOP BAR (YouTube style) ===== */
+.logo-area {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* ===== LOGO (TOP LEFT CORNER) ===== */
+.logo {
+    height: 90px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+}
+
+/* ===== TITLE ===== */
+.logo-area h1 {
+    font-size: 22px;
+    margin: 0 auto;
+    text-align: center;
+    flex: 1;
+}
+
+/* ===== NAV ===== */
+.nav {
+    margin-top: 10px;
+    text-align: center;
+}
+
+.nav a {
+    color: #38bdf8;
+    text-decoration: none;
+    margin: 10px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.nav a:hover {
+    color: white;
+    border-bottom: 2px solid #38bdf8;
+}
+
+/* ===== SECTION ===== */
+.section {
+    text-align: center;
+    padding: 30px;
+}
+
+/* ===== GALLERY ===== */
+.gallery {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.gallery img {
+    height: 170px;
+    width: 170px;
+    margin: 10px;
+    border-radius: 10px;
+    border: 2px solid #38bdf8;
+    transition: 0.3s;
+}
+
+.gallery img:hover {
+    transform: scale(1.05);
+}
+
+/* ===== FOOTER ===== */
+.footer {
+    background: #0f172a;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    margin-top: 30px;
+}
+
+/* ===== BUTTONS ===== */
+.social button {
+    background: #38bdf8;
+    border: none;
+    padding: 10px;
+    margin: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.social button:hover {
+    background: white;
+    color: #0f172a;
+}

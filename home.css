@@ -14,9 +14,13 @@ h1:hover {
     transition: background-color 5.3s ease, color 4.3s ease;
 }
 header {
-    background-image:url(https://cdn.pixabay.com/photo/2016/11/29/03/53/school-1869716_960_720.jpg);
+    background-image:url(https://images.unsplash.com/photo-1504384308090-c894fdcc538d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Y2xhc3Nyb29tfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60);
 }
-
+image {
+    width: 100%;
+    height: auto;
+    border-radius: 6px;
+}
 nav {
     display: flex;
     justify-content: center;
