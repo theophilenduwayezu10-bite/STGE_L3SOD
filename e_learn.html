@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>E-Learning Student</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
+}
+
+body{
+    background:#0b0f19; /* black-blue */
+    color:white;
+}
+
+/* HEADER */
+header{
+    background:#0f172a;
+    text-align:center;
+    padding:20px;
+    border-bottom:2px solid #3b82f6;
+}
+
+header h1{
+    color:#facc15; /* yellow */
+}
+
+/* TOP BAR */
+.top-bar{
+    padding:15px 20px;
+}
+
+.top-bar button{
+    background:#3b82f6;
+    border:none;
+    padding:10px 15px;
+    border-radius:6px;
+    color:white;
+    cursor:pointer;
+}
+
+/* SEARCH */
+.search{
+    text-align:center;
+    margin:20px;
+}
+
+.search input{
+    width:60%;
+    padding:12px;
+    border-radius:8px;
+    border:1px solid #3b82f6;
+    background:#111827;
+    color:white;
+}
+
+/* CATEGORIES */
+.categories{
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:10px;
+    margin-bottom:20px;
+}
+
+.cat{
+    padding:8px 15px;
+    border:1px solid #3b82f6;
+    border-radius:20px;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.cat:hover{
+    background:#3b82f6;
+}
+
+/* GRID */
+.container{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:20px;
+    padding:20px;
+}
+
+/* CARD */
+.card{
+    background:#111827;
+    border:1px solid #3b82f6;
+    padding:20px;
+    border-radius:10px;
+    transition:0.3s;
+}
+
+.card:hover{
+    transform:translateY(-5px);
+    border-color:#22c55e; /* green hover */
+}
+
+.card h3{
+    color:#facc15;
+}
+
+.card p{
+    color:#cbd5e1;
+    font-size:14px;
+    margin-top:5px;
+}
+
+/* DOWNLOAD BUTTON */
+a{
+    display:inline-block;
+    margin-top:10px;
+    padding:10px;
+    background:#22c55e;
+    color:white;
+    text-decoration:none;
+    border-radius:6px;
+    transition:0.3s;
+}
+
+a:hover{
+    background:#16a34a;
+}
+
+/* FOOTER */
+footer{
+    text-align:center;
+    padding:15px;
+    margin-top:20px;
+    border-top:1px solid #3b82f6;
+    color:#aaa;
+    font-size:13px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>E-LEARNING STUDENT</h1>
+</header>
+
+<!-- GO BACK -->
+<div class="top-bar">
+    <button onclick="window.location.href='index.html'">⬅ Go Back</button>
+</div>
+
+<!-- SEARCH -->
+<div class="search">
+    <input type="text" placeholder="Search subject...">
+</div>
+
+<!-- CATEGORIES -->
+<div class="categories">
+    <div class="cat">All</div>
+    <div class="cat">Web Dev</div>
+    <div class="cat">Java</div>
+    <div class="cat">Vue</div>
+    <div class="cat">UX/UI</div>
+</div>
+
+<!-- CONTENT -->
+<div class="container">
+
+    <div class="card">
+        <h3>Web Development</h3>
+        <p>Learn HTML, CSS, JavaScript basics.</p>
+        <a href="#">Download</a>
+    </div>
+
+    <div class="card">
+        <h3>JavaScript</h3>
+        <p>Interactive web programming.</p>
+        <a href="#">Download</a>
+    </div>
+
+    <div class="card">
+        <h3>Vue JS</h3>
+        <p>Modern frontend framework.</p>
+        <a href="#">Download</a>
+    </div>
+
+    <div class="card">
+        <h3>UX/UI Design</h3>
+        <p>Design user friendly interfaces.</p>
+        <a href="#">Download</a>
+    </div>
+
+</div>
+
+<footer>
+    © 2026 Student E-Learning Platform
+</footer>
+
+</body>
+</html>

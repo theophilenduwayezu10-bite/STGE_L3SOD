@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Teacher Panel</title>
+
+<style>
+body{
+    background:black;
+    color:white;
+    font-family:Arial;
+    padding:20px;
+}
+
+h1{
+    text-align:center;
+    color:#3b82f6;
+}
+
+.box{
+    max-width:600px;
+    margin:auto;
+    background:#111;
+    padding:20px;
+    border:1px solid #3b82f6;
+    border-radius:10px;
+}
+
+input, button{
+    width:100%;
+    padding:12px;
+    margin-top:10px;
+    border-radius:6px;
+    border:1px solid #3b82f6;
+}
+
+input{
+    background:black;
+    color:white;
+}
+
+button{
+    background:#3b82f6;
+    color:white;
+    cursor:pointer;
+}
+
+.card{
+    background:#111;
+    border:1px solid #3b82f6;
+    margin-top:15px;
+    padding:15px;
+    border-radius:10px;
+}
+
+.del{
+    background:red;
+    border:none;
+    margin-top:10px;
+    padding:8px;
+    color:white;
+    cursor:pointer;
+}
+</style>
+</head>
+
+<body>
+
+<h1>TEACHER PANEL</h1>
+
+<div class="box">
+
+<input type="text" id="title" placeholder="Subject Name">
+<input type="file" id="file">
+
+<button onclick="upload()">Upload Subject</button>
+
+</div>
+
+<div id="list"></div>
+
+<script>
+
+function upload(){
+
+    let title = document.getElementById("title").value;
+    let file = document.getElementById("file").files[0];
+
+    if(!title || !file){
+        alert("Fill all fields");
+        return;
+    }
+
+    let reader = new FileReader();
+
+    reader.onload = function(){
+
+        let data = JSON.parse(localStorage.getItem("subjects")) || [];
+
+        data.push({
+            title:title,
+            file:reader.result,
+            name:file.name
+        });
+
+        localStorage.setItem("subjects", JSON.stringify(data));
+
+        show();
+    }
+
+    reader.readAsDataURL(file);
+}
+
+function deleteItem(i){
+
+    let data = JSON.parse(localStorage.getItem("subjects")) || [];
+
+    data.splice(i,1);
+
+    localStorage.setItem("subjects", JSON.stringify(data));
+
+    show();
+}
+
+function show(){
+
+    let data = JSON.parse(localStorage.getItem("subjects")) || [];
+
+    let out = "";
+
+    data.forEach((s,i)=>{
+
+        out += `
+        <div class="card">
+            <h3>${s.title}</h3>
+            <a href="${s.file}" download="${s.name}" style="color:#60a5fa;">Download</a>
+            <button class="del" onclick="deleteItem(${i})">Delete</button>
+        </div>
+        `;
+    });
+
+    document.getElementById("list").innerHTML = out;
+}
+
+show();
+
+setInterval(show,1000);
+
+</script>
+<button onclick="window.location.href='next_teach.html'">Go Back</button>
+
+</body>
+</html>

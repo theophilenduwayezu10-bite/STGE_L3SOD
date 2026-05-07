@@ -6,63 +6,103 @@
 <title>Next Page</title>
 
 <style>
-body {
-  font-family: Arial, sans-serif;
-  background: #f4f6f9;
-  text-align: center;
-  margin: 0;
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Arial, sans-serif;
 }
 
-h3 {
-  background: black;
-  color: white;
-  padding: 15px;
-  margin: 0;
+body{
+  background: linear-gradient(135deg,#0f172a,#1e293b,#2563eb);
+  color:white;
+  text-align:center;
+  min-height:100vh;
 }
 
-h2 {
-  color: #333;
-  margin: 20px;
+/* HEADER */
+h3{
+  background:#0f172a;
+  color:#facc15;
+  padding:15px;
 }
 
-fieldset {
-  width: 80%;
-  margin: 20px auto;
-  padding: 20px;
-  background: white;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+/* MESSAGE */
+h2{
+  margin:20px;
+  color:#cbd5e1;
 }
 
-.container {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 20px;
+/* FIELDSET */
+fieldset{
+  width:80%;
+  margin:20px auto;
+  padding:20px;
+  border-radius:12px;
+  border:1px solid rgba(255,255,255,0.2);
+  background:rgba(255,255,255,0.05);
+  backdrop-filter: blur(10px);
 }
 
-.card {
-  width: 180px;
-  text-decoration: none;
-  background: white;
-  padding: 10px;
-  border-radius: 12px;
-  transition: 0.3s;
-  color: black;
+/* CONTAINER */
+.container{
+  display:flex;
+  justify-content:center;
+  flex-wrap:wrap;
+  gap:20px;
 }
 
-.card:hover {
-  transform: scale(1.09);
+/* CARD */
+.card{
+  width:180px;
+  text-decoration:none;
+  background:rgba(255,255,255,0.08);
+  padding:10px;
+  border-radius:12px;
+  transition:0.3s;
+  color:white;
+  border:1px solid rgba(255,255,255,0.1);
 }
 
-.card img {
-  width: 100%;
-  height: 140px;
-  border-radius: 10px;
+.card:hover{
+  transform:scale(1.08);
+  border-color:#22c55e;
+}
+
+/* IMAGE */
+.card img{
+  width:100%;
+  height:140px;
+  border-radius:10px;
+}
+
+/* TEXT */
+.card p{
+  margin-top:8px;
+  color:#cbd5e1;
+}
+
+/* BUTTON */
+button{
+  margin-top:20px;
+  padding:12px 20px;
+  border:none;
+  border-radius:10px;
+  cursor:pointer;
+  font-weight:bold;
+  background:#facc15;
+  color:#0f172a;
+  transition:0.3s;
+}
+
+button:hover{
+  background:#22c55e;
+  color:white;
 }
 </style>
 
 </head>
+
 <body>
 
 <h3>WELCOME TO THE NEXT PAGE</h3>
@@ -77,27 +117,25 @@ You can now access learning, marks, attendance, and rules.
 
 <div class="container">
 
-  <a href="about.html" class="card">
+  <a href="e_learn.html" class="card">
     <img src="e_learn.png">
     <p>E-Learning</p>
   </a>
 
-  <a href="viewattendance.html" class="card">
+  <a href="student_attendance.html" class="card">
     <img src="attendance.png">
     <p>Attendance</p>
   </a>
 
-  <a href="viewmarks.html" class="card">
+  <a href="student_mark.html" class="card">
     <img src="marks.png">
     <p>Marks</p>
   </a>
 
-  <a href="rules.html" class="card">
-    <img src="rules and reg.png">
-    <p>Rules</p>
-  </a>
-
 </div>
+
+<button onclick="window.location.href='index.html'">Go Back</button>
+
 </fieldset>
 
 </body>

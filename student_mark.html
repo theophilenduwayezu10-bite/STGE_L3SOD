@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Student Marks View</title>
+
+<style>
+body{
+    font-family:Arial;
+    background: linear-gradient(135deg,#0f172a,#1e293b,#2563eb);
+    margin:0;
+    padding:20px;
+    color:white;
+}
+
+h2{
+    text-align:center;
+    color:#facc15;
+}
+
+table{
+    width:95%;
+    margin:auto;
+    border-collapse:collapse;
+    background:rgba(255,255,255,0.1);
+    color:white;
+    border-radius:10px;
+    overflow:hidden;
+}
+
+th{
+    background:#0f172a;
+    color:white;
+    padding:10px;
+}
+
+td{
+    border:1px solid rgba(255,255,255,0.2);
+    padding:10px;
+    text-align:center;
+}
+
+.msg{
+    text-align:center;
+    margin-top:20px;
+    color:#f87171;
+}
+
+.total{
+    color:#22c55e;
+    font-weight:bold;
+}
+</style>
+
+</head>
+
+<body>
+
+<h2>📘 Student Marks (READ ONLY)</h2>
+
+<table>
+<tr>
+    <th>Name</th>
+    <th>Sex</th>
+    <th>Web</th>
+    <th>Version</th>
+    <th>JS</th>
+    <th>UI/UX</th>
+    <th>Graphic</th>
+    <th>Game</th>
+    <th>Total</th>
+</tr>
+
+<tbody id="data"></tbody>
+</table>
+
+<p class="msg" id="msg"></p>
+
+<script>
+
+let saved = JSON.parse(localStorage.getItem("class_marks")) || [];
+
+let tbody = document.getElementById("data");
+
+if(saved.length === 0){
+    document.getElementById("msg").innerText = "No marks saved yet!";
+}else{
+
+    saved.forEach(student => {
+
+        let m = student.marks || [0,0,0,0,0,0];
+
+        let row = `
+        <tr>
+            <td>${student.name}</td>
+            <td>${student.sex}</td>
+            <td>${m[0]}</td>
+            <td>${m[1]}</td>
+            <td>${m[2]}</td>
+            <td>${m[3]}</td>
+            <td>${m[4]}</td>
+            <td>${m[5]}</td>
+            <td class="total">${student.total}</td>
+        </tr>
+        `;
+
+        tbody.innerHTML += row;
+    });
+}
+
+</script>
+<button onclick="window.location.href='index.html'">Go Back</button>
+
+</body>
+</html>

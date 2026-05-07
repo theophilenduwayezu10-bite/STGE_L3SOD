@@ -1,39 +1,48 @@
-/* ===== BODY ===== */
 body {
     margin: 0;
     font-family: Arial, sans-serif;
-    background: #ffffff;
+    background: #f1f5f9;
     color: #111827;
 }
 
 /* ===== HEADER ===== */
 .header {
-    background: #0f172a;
+    background: #6a7388;
     color: white;
     padding: 15px 20px;
 }
 
-/* ===== TOP BAR (YouTube style) ===== */
+/* ===== LOGO AREA ===== */
 .logo-area {
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
 
-/* ===== LOGO (TOP LEFT CORNER) ===== */
 .logo {
     height: 90px;
     width: auto;
-    object-fit: contain;
-    display: block;
 }
 
 /* ===== TITLE ===== */
-.logo-area h1 {
-    font-size: 22px;
-    margin: 0 auto;
-    text-align: center;
-    flex: 1;
+.logo{
+    width:140px;
+    height:140px;
+    object-fit:contain;
+    background:white;
+    padding:10px;
+    border-radius:25px;
+    box-shadow:0 5px 20px rgba(0,0,0,0.4);
+    transition:0.4s;
+    cursor:pointer;
+}
+
+/* Hover Effect */
+
+.logo:hover{
+    background:#22c55e;
+    transform:scale(1.1) rotate(5deg);
+    box-shadow:0 10px 25px rgba(34,197,94,0.6);
 }
 
 /* ===== NAV ===== */
@@ -49,10 +58,19 @@ body {
     font-weight: bold;
     transition: 0.3s;
 }
-
+h1{
+    font-size: 2em;
+    color: #facc15;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    text-align:     center;
+    vertical-align: top;
+}
+/* 🔵 + 🟢 NAV ACTIVE STYLE */
 .nav a:hover {
-    color: white;
-    border-bottom: 2px solid #38bdf8;
+    color: #ffffff;
+    background: #22c55e; /* GREEN ACTIVE */
+    padding: 4px 8px;
+    border-radius: 6px;
 }
 
 /* ===== SECTION ===== */
@@ -79,6 +97,7 @@ body {
 
 .gallery img:hover {
     transform: scale(1.05);
+    border-color: #facc15; /* YELLOW highlight */
 }
 
 /* ===== FOOTER ===== */
@@ -90,7 +109,7 @@ body {
     margin-top: 30px;
 }
 
-/* ===== BUTTONS ===== */
+/* ===== SOCIAL BUTTONS ===== */
 .social button {
     background: #38bdf8;
     border: none;
@@ -99,9 +118,22 @@ body {
     font-weight: bold;
     cursor: pointer;
     border-radius: 5px;
+    color: #0f172a;
+    transition: 0.3s;
 }
 
+/* 🟡 BUTTON HOVER (IMPORTANT CHANGE) */
 .social button:hover {
-    background: white;
+    background: #facc15; /* YELLOW */
     color: #0f172a;
+    transform: scale(1.05);
+}
+
+/* 🟢 ACTIVE EMPHASIS (small touch) */
+.section h2 {
+    color: #22c55e;
+}
+
+.section p {
+    color: #475569;
 }

@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Teacher Attendance System</title>
+
+<style>
+body {
+  font-family: Arial;
+  background: linear-gradient(135deg,#0f172a,#1e293b,#2563eb);
+  color: white;
+  padding: 20px;
+}
+
+.container {
+  max-width: 1000px;
+  margin: auto;
+}
+
+h1 {
+  text-align: center;
+  color: #facc15;
+}
+
+.card {
+  background: rgba(255,255,255,0.08);
+  padding: 20px;
+  border-radius: 15px;
+  margin-top: 20px;
+}
+
+input, select {
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
+  margin: 5px;
+}
+
+button {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.add-btn { background: #22c55e; color: white; }
+.save-btn { background: #3b82f6; color: white; }
+.delete-btn { background: #ef4444; color: white; }
+
+table {
+  width: 100%;
+  margin-top: 15px;
+  border-collapse: collapse;
+}
+
+th {
+  background: #facc15;
+  color: black;
+  padding: 10px;
+}
+
+td {
+  text-align: center;
+  padding: 10px;
+  background: rgba(255,255,255,0.08);
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>📘 Teacher Attendance System</h1>
+
+<div class="card">
+
+<!-- ADD STUDENT -->
+<input type="text" id="name" placeholder="Student Name">
+<select id="sex">
+  <option value="">Sex</option>
+  <option>Male</option>
+  <option>Female</option>
+</select>
+
+<button class="add-btn" onclick="addStudent()">➕ Add Student</button><button onclick="window.location.href='next_teach.html'">Go Back</button>
+
+<table>
+<thead>
+<tr>
+  <th>Name</th>
+  <th>Sex</th>
+  <th>Status</th>
+  <th>Action</th>
+</tr>
+</thead>
+
+<tbody id="table"></tbody>
+</table>
+
+<br>
+
+<button class="save-btn" onclick="saveAttendance()">💾 Save Attendance</button>
+
+</div>
+
+</div>
+
+<script>
+
+let students = JSON.parse(localStorage.getItem("students")) || [];
+
+// LOAD
+function load(){
+  let table = document.getElementById("table");
+  table.innerHTML = "";
+
+  students.forEach((s,i)=>{
+    table.innerHTML += `
+      <tr>
+        <td>${s.name}</td>
+        <td>${s.sex}</td>
+
+        <td>
+          <select id="status-${i}">
+            <option>Present</option>
+            <option>Absent</option>
+            <option>Late</option>
+          </select>
+        </td>
+
+        <td>
+          <button class="delete-btn" onclick="deleteStudent(${i})">Delete</button>
+        </td>
+      </tr>
+    `;
+  });
+}
+
+// ADD
+function addStudent(){
+
+  let name = document.getElementById("name").value;
+  let sex = document.getElementById("sex").value;
+
+  if(name === "" || sex === ""){
+    alert("Fill all fields");
+    return;
+  }
+
+  students.push({name, sex});
+
+  localStorage.setItem("students", JSON.stringify(students));
+
+  document.getElementById("name").value = "";
+  document.getElementById("sex").value = "";
+
+  load();
+}
+
+// DELETE
+function deleteStudent(index){
+
+  if(confirm("Are you sure you want to delete this student?")){
+
+    students.splice(index, 1);
+
+    localStorage.setItem("students", JSON.stringify(students));
+
+    load();
+  }
+}
+
+// SAVE ATTENDANCE
+function saveAttendance(){
+
+  let data = [];
+
+  students.forEach((s,i)=>{
+
+    let status = document.getElementById("status-"+i).value;
+
+    data.push({
+      name: s.name,
+      sex: s.sex,
+      status: status
+    });
+  });
+
+  let date = new Date().toISOString().split("T")[0];
+
+  localStorage.setItem("attendance_"+date, JSON.stringify(data));
+
+  alert("Attendance Saved!");
+}
+
+load();
+
+</script>
+
+</body>
+</html>
