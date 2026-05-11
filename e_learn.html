@@ -14,7 +14,7 @@
 }
 
 body{
-    background:#0b0f19; /* black-blue */
+    background:#0b0f19;
     color:white;
 }
 
@@ -27,15 +27,16 @@ header{
 }
 
 header h1{
-    color:#facc15; /* yellow */
+    color:#facc15;
 }
 
-/* TOP BAR */
+/* BUTTON */
 .top-bar{
-    padding:15px 20px;
+    text-align:center;
+    padding:15px;
 }
 
-.top-bar button{
+button{
     background:#3b82f6;
     border:none;
     padding:10px 15px;
@@ -59,27 +60,6 @@ header h1{
     color:white;
 }
 
-/* CATEGORIES */
-.categories{
-    display:flex;
-    justify-content:center;
-    flex-wrap:wrap;
-    gap:10px;
-    margin-bottom:20px;
-}
-
-.cat{
-    padding:8px 15px;
-    border:1px solid #3b82f6;
-    border-radius:20px;
-    cursor:pointer;
-    transition:0.3s;
-}
-
-.cat:hover{
-    background:#3b82f6;
-}
-
 /* GRID */
 .container{
     display:grid;
@@ -99,7 +79,7 @@ header h1{
 
 .card:hover{
     transform:translateY(-5px);
-    border-color:#22c55e; /* green hover */
+    border-color:#22c55e;
 }
 
 .card h3{
@@ -112,8 +92,8 @@ header h1{
     margin-top:5px;
 }
 
-/* DOWNLOAD BUTTON */
-a{
+/* DOWNLOAD */
+.download{
     display:inline-block;
     margin-top:10px;
     padding:10px;
@@ -121,10 +101,10 @@ a{
     color:white;
     text-decoration:none;
     border-radius:6px;
-    transition:0.3s;
+    cursor:pointer;
 }
 
-a:hover{
+.download:hover{
     background:#16a34a;
 }
 
@@ -146,57 +126,72 @@ footer{
     <h1>E-LEARNING STUDENT</h1>
 </header>
 
-<!-- GO BACK -->
 <div class="top-bar">
     <button onclick="window.location.href='index.html'">⬅ Go Back</button>
 </div>
 
-<!-- SEARCH -->
 <div class="search">
     <input type="text" placeholder="Search subject...">
 </div>
 
-<!-- CATEGORIES -->
-<div class="categories">
-    <div class="cat">All</div>
-    <div class="cat">Web Dev</div>
-    <div class="cat">Java</div>
-    <div class="cat">Vue</div>
-    <div class="cat">UX/UI</div>
-</div>
-
-<!-- CONTENT -->
-<div class="container">
-
-    <div class="card">
-        <h3>Web Development</h3>
-        <p>Learn HTML, CSS, JavaScript basics.</p>
-        <a href="#">Download</a>
-    </div>
-
-    <div class="card">
-        <h3>JavaScript</h3>
-        <p>Interactive web programming.</p>
-        <a href="#">Download</a>
-    </div>
-
-    <div class="card">
-        <h3>Vue JS</h3>
-        <p>Modern frontend framework.</p>
-        <a href="#">Download</a>
-    </div>
-
-    <div class="card">
-        <h3>UX/UI Design</h3>
-        <p>Design user friendly interfaces.</p>
-        <a href="#">Download</a>
-    </div>
-
-</div>
+<div class="container" id="container"></div>
 
 <footer>
     © 2026 Student E-Learning Platform
 </footer>
+
+<script>
+
+// ================== LOAD SAVED DATA ==================
+let data = JSON.parse(localStorage.getItem("subjects")) || [];
+
+// fallback demo data niba ntacyo kirimo
+if(data.length === 0){
+    data = [
+        {title:"Web Development", desc:"HTML, CSS, JS basics"},
+        {title:"JavaScript", desc:"Interactive programming"},
+        {title:"Vue JS", desc:"Modern frontend framework"},
+        {title:"UX/UI Design", desc:"Design user interfaces"}
+    ];
+}
+
+let container = document.getElementById("container");
+
+// ================== RENDER CARDS ==================
+data.forEach((item, index) => {
+
+    let card = document.createElement("div");
+    card.className = "card";
+
+    card.innerHTML = `
+        <h3>${item.title}</h3>
+        <p>${item.desc}</p>
+
+        <a class="download" onclick="downloadFile('${item.title}')">
+            Download
+        </a>
+    `;
+
+    container.appendChild(card);
+});
+
+// ================== FAKE DOWNLOAD ==================
+function downloadFile(title){
+
+    let fileContent = "Course: " + title + "\nDownloaded from E-Learning System";
+
+    let blob = new Blob([fileContent], {type:"text/plain"});
+    let url = URL.createObjectURL(blob);
+
+    let a = document.createElement("a");
+    a.href = url;
+    a.download = title + ".txt";
+    a.click();
+
+    URL.revokeObjectURL(url);
+}
+
+</script>
 
 </body>
 </html>
