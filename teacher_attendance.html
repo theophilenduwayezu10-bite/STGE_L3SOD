@@ -6,65 +6,85 @@
 <title>Teacher Attendance System</title>
 
 <style>
-body {
-  font-family: Arial;
-  background: linear-gradient(135deg,#0f172a,#1e293b,#2563eb);
-  color: white;
-  padding: 20px;
+body{
+  font-family:Arial;
+  background:linear-gradient(135deg,#0f172a,#1e293b,#2563eb);
+  color:white;
+  padding:20px;
 }
 
-.container {
-  max-width: 1000px;
-  margin: auto;
+.container{
+  max-width:1100px;
+  margin:auto;
 }
 
-h1 {
-  text-align: center;
-  color: #facc15;
+h1,h2{
+  text-align:center;
+  color:#facc15;
 }
 
-.card {
-  background: rgba(255,255,255,0.08);
-  padding: 20px;
-  border-radius: 15px;
-  margin-top: 20px;
+.card{
+  background:rgba(255,255,255,0.08);
+  padding:20px;
+  border-radius:15px;
+  margin-top:20px;
 }
 
-input, select {
-  padding: 10px;
-  border-radius: 8px;
-  border: none;
-  margin: 5px;
+input,select{
+  padding:10px;
+  border:none;
+  border-radius:8px;
+  margin:5px;
 }
 
-button {
-  padding: 10px 15px;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  font-weight: bold;
+button{
+  padding:10px 15px;
+  border:none;
+  border-radius:8px;
+  cursor:pointer;
+  font-weight:bold;
 }
 
-.add-btn { background: #22c55e; color: white; }
-.save-btn { background: #3b82f6; color: white; }
-.delete-btn { background: #ef4444; color: white; }
-
-table {
-  width: 100%;
-  margin-top: 15px;
-  border-collapse: collapse;
+.add-btn{
+  background:#22c55e;
+  color:white;
 }
 
-th {
-  background: #facc15;
-  color: black;
-  padding: 10px;
+.save-btn{
+  background:#3b82f6;
+  color:white;
 }
 
-td {
-  text-align: center;
-  padding: 10px;
-  background: rgba(255,255,255,0.08);
+.delete-btn{
+  background:#ef4444;
+  color:white;
+}
+
+.search-btn{
+  background:#facc15;
+  color:black;
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+  margin-top:15px;
+}
+
+th{
+  background:#facc15;
+  color:black;
+  padding:10px;
+}
+
+td{
+  background:rgba(255,255,255,0.08);
+  text-align:center;
+  padding:10px;
+}
+
+.view-box{
+  margin-top:30px;
 }
 </style>
 </head>
@@ -79,15 +99,27 @@ td {
 
 <!-- ADD STUDENT -->
 <input type="text" id="name" placeholder="Student Name">
+
 <select id="sex">
   <option value="">Sex</option>
   <option>Male</option>
   <option>Female</option>
 </select>
 
-<button class="add-btn" onclick="addStudent()">➕ Add Student</button><button onclick="window.location.href='next_teach.html'">Go Back</button>
+<button class="add-btn" onclick="addStudent()">➕ Add Student</button>
+
+<button onclick="window.location.href='next_teach.html'">
+⬅ Go Back
+</button>
+
+<br><br>
+
+<!-- DATE -->
+<label>Select Attendance Date:</label>
+<input type="date" id="attendanceDate">
 
 <table>
+
 <thead>
 <tr>
   <th>Name</th>
@@ -98,11 +130,41 @@ td {
 </thead>
 
 <tbody id="table"></tbody>
+
 </table>
 
 <br>
 
-<button class="save-btn" onclick="saveAttendance()">💾 Save Attendance</button>
+<button class="save-btn" onclick="saveAttendance()">
+💾 Save Attendance
+</button>
+
+</div>
+
+<!-- STUDENT VIEW -->
+<div class="card view-box">
+
+<h2>📅 View Attendance By Date</h2>
+
+<input type="date" id="viewDate">
+
+<button class="search-btn" onclick="viewAttendance()">
+🔍 View Attendance
+</button>
+
+<table>
+
+<thead>
+<tr>
+  <th>Name</th>
+  <th>Sex</th>
+  <th>Status</th>
+</tr>
+</thead>
+
+<tbody id="attendanceView"></tbody>
+
+</table>
 
 </div>
 
@@ -112,15 +174,20 @@ td {
 
 let students = JSON.parse(localStorage.getItem("students")) || [];
 
-// LOAD
+// LOAD STUDENTS
 function load(){
+
   let table = document.getElementById("table");
+
   table.innerHTML = "";
 
   students.forEach((s,i)=>{
+
     table.innerHTML += `
       <tr>
+
         <td>${s.name}</td>
+
         <td>${s.sex}</td>
 
         <td>
@@ -132,30 +199,37 @@ function load(){
         </td>
 
         <td>
-          <button class="delete-btn" onclick="deleteStudent(${i})">Delete</button>
+          <button class="delete-btn"
+          onclick="deleteStudent(${i})">
+          Delete
+          </button>
         </td>
+
       </tr>
     `;
   });
 }
 
-// ADD
+// ADD STUDENT
 function addStudent(){
 
   let name = document.getElementById("name").value;
   let sex = document.getElementById("sex").value;
 
-  if(name === "" || sex === ""){
+  if(name==="" || sex===""){
     alert("Fill all fields");
     return;
   }
 
-  students.push({name, sex});
+  students.push({name,sex});
 
-  localStorage.setItem("students", JSON.stringify(students));
+  localStorage.setItem(
+    "students",
+    JSON.stringify(students)
+  );
 
-  document.getElementById("name").value = "";
-  document.getElementById("sex").value = "";
+  document.getElementById("name").value="";
+  document.getElementById("sex").value="";
 
   load();
 }
@@ -163,11 +237,14 @@ function addStudent(){
 // DELETE
 function deleteStudent(index){
 
-  if(confirm("Are you sure you want to delete this student?")){
+  if(confirm("Delete this student?")){
 
-    students.splice(index, 1);
+    students.splice(index,1);
 
-    localStorage.setItem("students", JSON.stringify(students));
+    localStorage.setItem(
+      "students",
+      JSON.stringify(students)
+    );
 
     load();
   }
@@ -176,24 +253,86 @@ function deleteStudent(index){
 // SAVE ATTENDANCE
 function saveAttendance(){
 
+  let date =
+  document.getElementById("attendanceDate").value;
+
+  if(date===""){
+    alert("Select date first");
+    return;
+  }
+
   let data = [];
 
   students.forEach((s,i)=>{
 
-    let status = document.getElementById("status-"+i).value;
+    let status =
+    document.getElementById("status-"+i).value;
 
     data.push({
-      name: s.name,
-      sex: s.sex,
-      status: status
+      name:s.name,
+      sex:s.sex,
+      status:status
     });
+
   });
 
-  let date = new Date().toISOString().split("T")[0];
+  localStorage.setItem(
+    "attendance_"+date,
+    JSON.stringify(data)
+  );
 
-  localStorage.setItem("attendance_"+date, JSON.stringify(data));
+  alert("Attendance Saved Successfully!");
+}
 
-  alert("Attendance Saved!");
+// VIEW ATTENDANCE
+function viewAttendance(){
+
+  let date =
+  document.getElementById("viewDate").value;
+
+  if(date===""){
+    alert("Select date");
+    return;
+  }
+
+  let attendance =
+  JSON.parse(
+    localStorage.getItem("attendance_"+date)
+  ) || [];
+
+  let table =
+  document.getElementById("attendanceView");
+
+  table.innerHTML="";
+
+  if(attendance.length===0){
+
+    table.innerHTML = `
+      <tr>
+        <td colspan="3">
+        No attendance found
+        </td>
+      </tr>
+    `;
+
+    return;
+  }
+
+  attendance.forEach((a)=>{
+
+    table.innerHTML += `
+      <tr>
+
+        <td>${a.name}</td>
+
+        <td>${a.sex}</td>
+
+        <td>${a.status}</td>
+
+      </tr>
+    `;
+  });
+
 }
 
 load();

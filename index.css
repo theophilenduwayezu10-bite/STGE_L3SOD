@@ -1,139 +1,243 @@
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background: #f1f5f9;
-    color: #111827;
+body{
+    margin:0;
+    font-family:Arial, sans-serif;
+    background:#f1f5f9;
+    color:#111827;
 }
 
-/* ===== HEADER ===== */
-.header {
-    background: #6a7388;
-    color: white;
-    padding: 15px 20px;
+/* ================= HEADER ================= */
+
+.header{
+    background:#6a7388;
+    padding:15px 25px;
 }
 
-/* ===== LOGO AREA ===== */
-.logo-area {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+/* TOP BAR (LOGO + TITLE) */
+.top-bar{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:15px;
 }
 
-.logo {
-    height: 90px;
-    width: auto;
-}
-
-/* ===== TITLE ===== */
+/* LOGO */
 .logo{
-    width:140px;
-    height:140px;
+    width:75px;
+    height:75px;
     object-fit:contain;
-    background:white;
-    padding:10px;
-    border-radius:25px;
-    box-shadow:0 5px 20px rgba(0,0,0,0.4);
-    transition:0.4s;
-    cursor:pointer;
-}
 
-/* Hover Effect */
+    background:white;
+    padding:6px;
+    border-radius:12px;
+
+    box-shadow:0 4px 12px rgba(0,0,0,0.25);
+    transition:0.3s;
+}
 
 .logo:hover{
+    transform:scale(1.08);
     background:#22c55e;
-    transform:scale(1.1) rotate(5deg);
-    box-shadow:0 10px 25px rgba(34,197,94,0.6);
 }
 
-/* ===== NAV ===== */
-.nav {
-    margin-top: 10px;
-    text-align: center;
-}
-
-.nav a {
-    color: #38bdf8;
-    text-decoration: none;
-    margin: 10px;
-    font-weight: bold;
-    transition: 0.3s;
-}
+/* TITLE */
 h1{
-    font-size: 2em;
-    color: #facc15;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-    text-align:     center;
-    vertical-align: top;
-}
-/* 🔵 + 🟢 NAV ACTIVE STYLE */
-.nav a:hover {
-    color: #ffffff;
-    background: #22c55e; /* GREEN ACTIVE */
-    padding: 4px 8px;
-    border-radius: 6px;
+    font-size:2em;
+    color:#facc15;
+    margin:0;
+    text-align:center;
+    text-shadow:2px 2px 4px rgba(0,0,0,0.3);
 }
 
-/* ===== SECTION ===== */
-.section {
-    text-align: center;
-    padding: 30px;
+/* ================= NAV ================= */
+
+.nav{
+    margin-top:20px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:20px;
 }
 
-/* ===== GALLERY ===== */
-.gallery {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
+.nav a{
+    color:#38bdf8;
+    text-decoration:none;
+    font-weight:bold;
+
+    padding:8px 14px;
+    border-radius:8px;
+    transition:0.3s;
 }
 
-.gallery img {
-    height: 170px;
-    width: 170px;
-    margin: 10px;
-    border-radius: 10px;
-    border: 2px solid #38bdf8;
-    transition: 0.3s;
+.nav a:hover{
+    background:#22c55e;
+    color:white;
 }
 
-.gallery img:hover {
-    transform: scale(1.05);
-    border-color: #facc15; /* YELLOW highlight */
+/* ================= SECTION ================= */
+
+.section{
+    text-align:center;
+    padding:30px;
 }
 
-/* ===== FOOTER ===== */
-.footer {
-    background: #0f172a;
-    color: white;
-    text-align: center;
-    padding: 20px;
-    margin-top: 30px;
+.section h2{
+    color:#22c55e;
+    margin-bottom:10px;
 }
 
-/* ===== SOCIAL BUTTONS ===== */
-.social button {
-    background: #38bdf8;
-    border: none;
-    padding: 10px;
-    margin: 5px;
-    font-weight: bold;
-    cursor: pointer;
-    border-radius: 5px;
-    color: #0f172a;
-    transition: 0.3s;
+.section p{
+    color:#475569;
+    font-size:18px;
 }
 
-/* 🟡 BUTTON HOVER (IMPORTANT CHANGE) */
-.social button:hover {
-    background: #facc15; /* YELLOW */
-    color: #0f172a;
-    transform: scale(1.05);
+/* ================= GALLERY ================= */
+
+.gallery{
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:15px;
 }
 
-/* 🟢 ACTIVE EMPHASIS (small touch) */
-.section h2 {
-    color: #22c55e;
+.gallery img{
+    width:170px;
+    height:170px;
+    object-fit:cover;
+
+    border-radius:10px;
+    border:2px solid #38bdf8;
+
+    transition:0.3s;
 }
 
-.section p {
-    color: #475569;
+.gallery img:hover{
+    transform:scale(1.05);
+    border-color:#facc15;
+}
+
+/* ================= TABLE (MARKS / ATTENDANCE) ================= */
+
+table{
+    width:95%;
+    margin:auto;
+    border-collapse:collapse;
+    background:rgba(255,255,255,0.08);
+    backdrop-filter:blur(10px);
+    color:white;
+    border-radius:12px;
+    overflow:hidden;
+    box-shadow:0 10px 25px rgba(0,0,0,0.4);
+}
+
+th{
+    background:#0f172a;
+    color:#facc15;
+    padding:14px;
+    text-transform:uppercase;
+}
+
+td{
+    border:1px solid rgba(255,255,255,0.15);
+    padding:12px;
+    text-align:center;
+}
+
+tr:hover{
+    background:rgba(255,255,255,0.1);
+}
+
+.total{
+    color:#22c55e;
+    font-weight:bold;
+}
+
+/* ================= MESSAGE ================= */
+
+.msg{
+    text-align:center;
+    margin-top:20px;
+    color:#f87171;
+    font-size:18px;
+}
+
+/* ================= BUTTON ================= */
+
+button{
+    display:block;
+    margin:25px auto;
+    padding:10px 18px;
+    background:#38bdf8;
+    border:none;
+    border-radius:8px;
+    font-weight:bold;
+    cursor:pointer;
+    color:#0f172a;
+    transition:0.3s;
+}
+
+button:hover{
+    background:#facc15;
+    transform:scale(1.05);
+}
+
+/* ================= FOOTER ================= */
+
+.footer{
+    background:#0f172a;
+    color:white;
+    text-align:center;
+    padding:20px;
+    margin-top:30px;
+}
+
+/* ================= SOCIAL ================= */
+
+.social button{
+    background:#38bdf8;
+    border:none;
+    padding:10px 15px;
+    margin:5px;
+    font-weight:bold;
+    cursor:pointer;
+    border-radius:5px;
+    color:#0f172a;
+    transition:0.3s;
+}
+
+.social button:hover{
+    background:#facc15;
+    transform:scale(1.05);
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media(max-width:900px){
+
+    .top-bar{
+        flex-direction:column;
+        text-align:center;
+    }
+
+    h1{
+        font-size:1.4em;
+    }
+
+    .nav{
+        gap:12px;
+        margin-top:15px;
+    }
+
+    .gallery img{
+        width:140px;
+        height:140px;
+    }
+
+    table{
+        font-size:12px;
+    }
+
+    th, td{
+        padding:8px;
+    }
 }

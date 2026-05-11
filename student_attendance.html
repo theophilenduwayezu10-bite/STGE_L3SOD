@@ -5,90 +5,104 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Student View</title>
 
-<!-- 🔥 SAME CSS EXACT COPY (NO CHANGE) -->
 <style>
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Poppins', sans-serif;
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Poppins',sans-serif;
 }
 
-body {
-  background: linear-gradient(135deg, #0f172a, #1e293b, #2563eb);
-  min-height: 100vh;
-  padding: 20px;
-  color: white;
+body{
+  background:linear-gradient(135deg,#0f172a,#1e293b,#2563eb);
+  min-height:100vh;
+  padding:20px;
+  color:white;
 }
 
-.container { max-width: 1200px; margin: auto; }
-
-.header {
-  background: rgba(255,255,255,0.1);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255,255,255,0.2);
-  padding: 25px;
-  border-radius: 20px;
-  text-align: center;
-  margin-bottom: 25px;
+.container{
+  max-width:1200px;
+  margin:auto;
 }
 
-.header h1 {
-  font-size: 40px;
-  color: #facc15;
+.header{
+  background:rgba(255,255,255,0.1);
+  backdrop-filter:blur(10px);
+  border:1px solid rgba(255,255,255,0.2);
+  padding:25px;
+  border-radius:20px;
+  text-align:center;
+  margin-bottom:25px;
 }
 
-.card {
-  background: rgba(255,255,255,0.08);
-  border: 1px solid rgba(255,255,255,0.15);
-  backdrop-filter: blur(10px);
-  border-radius: 20px;
-  padding: 25px;
+.header h1{
+  font-size:40px;
+  color:#facc15;
+}
+
+.card{
+  background:rgba(255,255,255,0.08);
+  border:1px solid rgba(255,255,255,0.15);
+  backdrop-filter:blur(10px);
+  border-radius:20px;
+  padding:25px;
 }
 
 input[type="date"]{
-  padding: 12px;
-  border-radius: 10px;
-  border: none;
-  outline: none;
-  font-size: 15px;
+  padding:12px;
+  border-radius:10px;
+  border:none;
+  outline:none;
+  font-size:15px;
 }
 
-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 20px;
+table{
+  width:100%;
+  border-collapse:collapse;
+  margin-top:20px;
 }
 
-th {
-  background: #facc15;
-  color: #111827;
-  padding: 15px;
+th{
+  background:#facc15;
+  color:#111827;
+  padding:15px;
 }
 
-td {
-  background: rgba(255,255,255,0.08);
-  padding: 14px;
-  text-align: center;
+td{
+  background:rgba(255,255,255,0.08);
+  padding:14px;
+  text-align:center;
 }
 
-.present { color: #22c55e; font-weight: bold; }
-.absent { color: #ef4444; font-weight: bold; }
-.late { color: #facc15; font-weight: bold; }
+.present{
+  color:#22c55e;
+  font-weight:bold;
+}
 
-footer {
+.absent{
+  color:#ef4444;
+  font-weight:bold;
+}
+
+.late{
+  color:#facc15;
+  font-weight:bold;
+}
+
+footer{
   text-align:center;
   margin-top:30px;
 }
-button {
-  padding: 12px 20px;
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
-  font-weight: bold;
-  background: #38bdf8;
-  color: white;
-  margin-top: 20px;
+
+button{
+  padding:12px 20px;
+  border:none;
+  border-radius:10px;
+  cursor:pointer;
+  font-weight:bold;
+  background:#38bdf8;
+  color:white;
+  margin-top:20px;
 }
 </style>
 </head>
@@ -104,18 +118,29 @@ button {
 
 <div class="card">
 
-<!-- 📅 ONLY CALENDAR -->
+<button onclick="window.location.href='index.html'">
+⬅ Go Back
+</button>
+
+<br><br>
+
+<label>Select Attendance Date:</label>
+
 <input type="date" id="date" onchange="loadData()">
+
 <table>
-<thead><button onclick="window.location.href='index.html'">Go Back</button>
+
+<thead>
 <tr>
   <th>Number</th>
   <th>Name</th>
+  <th>Sex</th>
   <th>Status</th>
 </tr>
 </thead>
 
 <tbody id="table"></tbody>
+
 </table>
 
 </div>
@@ -130,32 +155,68 @@ button {
 
 function loadData(){
 
-  const date = document.getElementById("date").value;
+  // GET DATE
+  const date =
+  document.getElementById("date").value;
 
-  const data = JSON.parse(localStorage.getItem(date)) || [];
+  // LOAD ATTENDANCE
+  const data =
+  JSON.parse(
+    localStorage.getItem("attendance_"+date)
+  ) || [];
 
-  const table = document.getElementById("table");
+  const table =
+  document.getElementById("table");
 
   table.innerHTML = "";
 
+  // IF EMPTY
+  if(data.length === 0){
+
+    table.innerHTML = `
+      <tr>
+        <td colspan="4">
+        No attendance found
+        </td>
+      </tr>
+    `;
+
+    return;
+  }
+
+  // SHOW DATA
   data.forEach((d,i)=>{
 
     let cls = "present";
-    if(d.status === "Absent") cls = "absent";
-    if(d.status === "Late") cls = "late";
+
+    if(d.status === "Absent"){
+      cls = "absent";
+    }
+
+    if(d.status === "Late"){
+      cls = "late";
+    }
 
     table.innerHTML += `
       <tr>
+
         <td>${i+1}</td>
+
         <td>${d.name}</td>
-        <td class="${cls}">${d.status}</td>
+
+        <td>${d.sex}</td>
+
+        <td class="${cls}">
+        ${d.status}
+        </td>
+
       </tr>
     `;
   });
+
 }
 
 </script>
-
 
 </body>
 </html>
