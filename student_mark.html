@@ -1,179 +1,177 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Student Marks View</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Student Marks</title>
 
 <style>
 
-body{
-    font-family:Arial, sans-serif;
-    background: linear-gradient(135deg,#0f172a,#1e293b,#2563eb);
-    margin:0;
-    padding:20px;
-    color:white;
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
 }
 
-/* ================= HEADER TITLE ================= */
+body{
+background:linear-gradient(135deg,#0f172a,#1e293b,#2563eb);
+min-height:100vh;
+padding:20px;
+color:white;
+}
 
 h2{
-    text-align:center;
-    color:#facc15;
-    margin-bottom:20px;
-    font-size:28px;
-    text-shadow:2px 2px 4px rgba(0,0,0,0.4);
+text-align:center;
+margin-bottom:20px;
+color:#facc15;
 }
 
-/* ================= TABLE CONTAINER ================= */
+.table-box{
+width:95%;
+margin:auto;
+overflow-x:auto;
+}
 
 table{
-    width:95%;
-    margin:auto;
-    border-collapse:collapse;
-    background:rgba(255,255,255,0.08);
-    backdrop-filter: blur(10px);
-    color:white;
-    border-radius:12px;
-    overflow:hidden;
-    box-shadow:0 10px 25px rgba(0,0,0,0.4);
+width:100%;
+border-collapse:collapse;
+background:white;
+color:black;
+min-width:1000px;
 }
-
-/* HEADER ROW */
 
 th{
-    background:#0f172a;
-    color:#facc15;
-    padding:14px;
-    font-size:14px;
-    text-transform:uppercase;
+background:#0f172a;
+color:white;
+padding:15px;
 }
-
-/* TABLE CELLS */
 
 td{
-    border:1px solid rgba(255,255,255,0.15);
-    padding:12px;
-    text-align:center;
+border:1px solid #ddd;
+text-align:center;
+padding:10px;
 }
-
-/* ROW HOVER EFFECT */
-
-tr:hover{
-    background:rgba(255,255,255,0.1);
-    transition:0.3s;
-}
-
-/* TOTAL COLUMN */
 
 .total{
-    color:#22c55e;
-    font-weight:bold;
+color:green;
+font-weight:bold;
 }
 
-/* ================= MESSAGE ================= */
-
-.msg{
-    text-align:center;
-    margin-top:20px;
-    color:#f87171;
-    font-size:18px;
+.refresh{
+text-align:center;
+margin-bottom:20px;
 }
-
-/* ================= BUTTON ================= */
 
 button{
-    display:block;
-    margin:25px auto 0;
-    padding:10px 18px;
-    background:#38bdf8;
-    border:none;
-    border-radius:8px;
-    font-weight:bold;
-    cursor:pointer;
-    color:#0f172a;
-    transition:0.3s;
+padding:12px 18px;
+border:none;
+border-radius:10px;
+background:#38bdf8;
+color:white;
+cursor:pointer;
 }
 
 button:hover{
-    background:#facc15;
-    transform:scale(1.05);
-}
-
-/* ================= RESPONSIVE ================= */
-
-@media(max-width:900px){
-
-    table{
-        font-size:12px;
-    }
-
-    th, td{
-        padding:8px;
-    }
-
-    h2{
-        font-size:20px;
-    }
+background:#0f172a;
+border:1px solid #38bdf8;
 }
 
 </style>
-
 </head>
 
 <body>
 
-<h2>📘 Student Marks (READ ONLY)</h2>
+<h2>📘 Student Marks</h2>
 
-<table>
+<div class="refresh">
+<button onclick="loadMarks()">🔄 Refresh</button>
+</div>
+
+<div class="table-box">
+
+<table id="table">
+
 <tr>
-    <th>Name</th>
-    <th>Sex</th>
-    <th>Web</th>
-    <th>Version</th>
-    <th>JS</th>
-    <th>UI/UX</th>
-    <th>Graphic</th>
-    <th>Game</th>
-    <th>Total</th>
+<th>Name</th>
+<th>Sex</th>
+<th>Web</th>
+<th>Version</th>
+<th>JavaScript</th>
+<th>UI/UX</th>
+<th>Graphic</th>
+<th>Game</th>
+<th>Total</th>
 </tr>
 
-<tbody id="data"></tbody>
 </table>
 
-<p class="msg" id="msg"></p>
-
-<button onclick="window.location.href='index.html'">⬅ Go Back</button>
+</div>
 
 <script>
 
-let saved = JSON.parse(localStorage.getItem("class_marks")) || [];
+function loadMarks(){
 
-let tbody = document.getElementById("data");
+let table = document.getElementById("table");
 
-if(saved.length === 0){
-    document.getElementById("msg").innerText = "⚠ No marks saved yet!";
-}else{
+table.innerHTML = `
 
-    saved.forEach(student => {
+<tr>
+<th>Name</th>
+<th>Sex</th>
+<th>Web</th>
+<th>Version</th>
+<th>JavaScript</th>
+<th>UI/UX</th>
+<th>Graphic</th>
+<th>Game</th>
+<th>Total</th>
+</tr>
 
-        let m = student.marks || [0,0,0,0,0,0];
+`;
 
-        let row = `
-        <tr>
-            <td>${student.name}</td>
-            <td>${student.sex}</td>
-            <td>${m[0]}</td>
-            <td>${m[1]}</td>
-            <td>${m[2]}</td>
-            <td>${m[3]}</td>
-            <td>${m[4]}</td>
-            <td>${m[5]}</td>
-            <td class="total">${student.total}</td>
-        </tr>
-        `;
+let students =
+JSON.parse(localStorage.getItem("cms_data")) || [];
 
-        tbody.innerHTML += row;
-    });
+students.forEach(student=>{
+
+let total = 0;
+
+student.marks.forEach(mark=>{
+total += Number(mark);
+});
+
+let row = table.insertRow();
+
+row.innerHTML = `
+
+<td>${student.name}</td>
+
+<td>${student.sex}</td>
+
+<td>${student.marks[0]}</td>
+
+<td>${student.marks[1]}</td>
+
+<td>${student.marks[2]}</td>
+
+<td>${student.marks[3]}</td>
+
+<td>${student.marks[4]}</td>
+
+<td>${student.marks[5]}</td>
+
+<td class="total">${total}</td>
+
+`;
+
+});
+
 }
+
+window.onload = loadMarks;
+
+setInterval(loadMarks,1000);
 
 </script>
 

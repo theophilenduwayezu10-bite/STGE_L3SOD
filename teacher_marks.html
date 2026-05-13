@@ -2,252 +2,307 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Teacher Marks Fixed</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Teacher Marks System</title>
 
 <style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+}
+
 body{
-    margin:0;
-    font-family:Arial;
-    background:linear-gradient(135deg,#0f172a,#1e293b,#2563eb);
-    color:white;
+background:linear-gradient(135deg,#0f172a,#1e293b,#2563eb);
+min-height:100vh;
+padding:20px;
+color:white;
 }
 
 h2{
-    text-align:center;
-    color:#facc15;
-    padding:10px;
+text-align:center;
+margin-bottom:20px;
+color:#facc15;
 }
 
-/* FORM */
 .form-box{
-    width:95%;
-    margin:auto;
-    background:rgba(255,255,255,0.08);
-    padding:15px;
-    border-radius:12px;
-    display:flex;
-    gap:10px;
-    justify-content:center;
-    flex-wrap:wrap;
+width:95%;
+margin:auto;
+background:rgba(255,255,255,0.08);
+padding:20px;
+border-radius:15px;
+display:flex;
+gap:10px;
+flex-wrap:wrap;
+justify-content:center;
 }
 
-input, select{
-    padding:10px;
-    border-radius:8px;
-    border:none;
+.form-box input,
+.form-box select{
+padding:12px;
+border:none;
+border-radius:10px;
+min-width:180px;
 }
 
 button{
-    padding:10px 15px;
-    border:none;
-    border-radius:8px;
-    background:#38bdf8;
-    color:white;
-    cursor:pointer;
+padding:12px 18px;
+border:none;
+border-radius:10px;
+background:#38bdf8;
+color:white;
+cursor:pointer;
 }
 
 button:hover{
-    background:#0f172a;
-    border:1px solid #38bdf8;
+background:#0f172a;
+border:1px solid #38bdf8;
 }
 
-/* TABLE */
+.table-box{
+width:95%;
+margin:auto;
+margin-top:20px;
+overflow-x:auto;
+}
+
 table{
-    width:95%;
-    margin:auto;
-    margin-top:20px;
-    background:white;
-    color:black;
-    border-collapse:collapse;
-    border-radius:10px;
-    overflow:hidden;
+width:100%;
+border-collapse:collapse;
+background:white;
+color:black;
+min-width:1000px;
 }
 
 th{
-    background:#0f172a;
-    color:white;
-    padding:10px;
+background:#0f172a;
+color:white;
+padding:15px;
 }
 
 td{
-    text-align:center;
-    padding:10px;
-    border:1px solid #ddd;
+border:1px solid #ddd;
+text-align:center;
+padding:10px;
+}
+
+td input{
+width:70px;
+padding:8px;
+text-align:center;
 }
 
 .total{
-    color:green;
-    font-weight:bold;
+color:green;
+font-weight:bold;
 }
 
 .delete-btn{
-    background:red;
-    color:white;
-    border:none;
-    padding:5px 10px;
-    border-radius:6px;
+background:red;
 }
+
+.save-box{
+text-align:center;
+margin-top:20px;
+}
+
 </style>
 </head>
 
 <body>
 
-<h2>📘 Teacher Marks System (FIXED)</h2>
+<h2>📘 Teacher Marks System</h2>
 
 <div class="form-box">
-    <input type="text" id="name" placeholder="Student Name">
 
-    <select id="sex">
-        <option value="">Sex</option>
-        <option>Male</option>
-        <option>Female</option>
-    </select>
+<input type="text" id="name" placeholder="Student Name">
 
-    <button onclick="addStudent()">➕ Add Student</button>
+<select id="sex">
+<option value="">Select Sex</option>
+<option>Male</option>
+<option>Female</option>
+</select>
+
+<button onclick="addStudent()">➕ Add Student</button>
+
 </div>
 
+<div class="table-box">
+
 <table id="table">
+
 <tr>
-    <th>Name</th>
-    <th>Sex</th>
-    <th>Web</th>
-    <th>Version</th>
-    <th>JS</th>
-    <th>UI</th>
-    <th>Graphic</th>
-    <th>Game</th>
-    <th>Total</th>
-    <th>Action</th>
+<th>Name</th>
+<th>Sex</th>
+<th>Web</th>
+<th>Version</th>
+<th>JavaScript</th>
+<th>UI/UX</th>
+<th>Graphic</th>
+<th>Game</th>
+<th>Total</th>
+<th>Action</th>
 </tr>
+
 </table>
 
-<div style="text-align:center;margin-top:20px;">
-<button onclick="saveData()">💾 Save All</button>
+</div>
+
+<div class="save-box">
+<button onclick="saveData(true)">💾 Save All</button>
 </div>
 
 <script>
 
 let students = [];
 
-/* LOAD DATA */
 window.onload = function(){
-    let saved = localStorage.getItem("cms_data");
-    if(saved){
-        students = JSON.parse(saved);
-        students.forEach(s=>{
-            addRow(s.name, s.sex, s.marks);
-        });
-    }
+
+let saved = localStorage.getItem("cms_data");
+
+if(saved){
+
+students = JSON.parse(saved);
+
+students.forEach(student=>{
+addRow(student.name,student.sex,student.marks);
+});
+
 }
 
-/* ADD STUDENT */
+}
+
 function addStudent(){
 
-    let name = document.getElementById("name").value;
-    let sex = document.getElementById("sex").value;
+let name = document.getElementById("name").value.trim();
+let sex = document.getElementById("sex").value;
 
-    if(name==="" || sex===""){
-        alert("Fill all fields");
-        return;
-    }
-
-    let student = {
-        name:name,
-        sex:sex,
-        marks:[0,0,0,0,0,0]
-    };
-
-    students.push(student);
-    addRow(name, sex, student.marks);
-
-    saveData();
-
-    document.getElementById("name").value="";
-    document.getElementById("sex").value="";
+if(name==="" || sex===""){
+alert("Fill all fields");
+return;
 }
 
-/* CREATE ROW */
-function addRow(name, sex, marks){
+let student = {
+name:name,
+sex:sex,
+marks:[0,0,0,0,0,0]
+};
 
-    let table = document.getElementById("table");
+students.push(student);
 
-    let row = table.insertRow();
+addRow(student.name,student.sex,student.marks);
 
-    row.innerHTML = `
-        <td>${name}</td>
-        <td>${sex}</td>
+saveData(false);
 
-        <td><input type="number" value="${marks[0]}" oninput="update()"></td>
-        <td><input type="number" value="${marks[1]}" oninput="update()"></td>
-        <td><input type="number" value="${marks[2]}" oninput="update()"></td>
-        <td><input type="number" value="${marks[3]}" oninput="update()"></td>
-        <td><input type="number" value="${marks[4]}" oninput="update()"></td>
-        <td><input type="number" value="${marks[5]}" oninput="update()"></td>
-
-        <td class="total">0</td>
-
-        <td><button class="delete-btn" onclick="deleteRow(this)">X</button></td>
-    `;
-
-    update();
+document.getElementById("name").value="";
+document.getElementById("sex").value="";
 }
 
-/* DELETE */
+function addRow(name,sex,marks){
+
+let table = document.getElementById("table");
+
+let row = table.insertRow();
+
+row.innerHTML = `
+
+<td>${name}</td>
+
+<td>${sex}</td>
+
+<td><input type="number" value="${marks[0]}" oninput="update()"></td>
+
+<td><input type="number" value="${marks[1]}" oninput="update()"></td>
+
+<td><input type="number" value="${marks[2]}" oninput="update()"></td>
+
+<td><input type="number" value="${marks[3]}" oninput="update()"></td>
+
+<td><input type="number" value="${marks[4]}" oninput="update()"></td>
+
+<td><input type="number" value="${marks[5]}" oninput="update()"></td>
+
+<td class="total">0</td>
+
+<td>
+<button class="delete-btn" onclick="deleteRow(this)">
+X
+</button>
+</td>
+
+`;
+
+update(false);
+
+}
+
+function update(show=false){
+
+let rows = document.querySelectorAll("#table tr");
+
+for(let i=1;i<rows.length;i++){
+
+let inputs = rows[i].querySelectorAll("input");
+
+let total = 0;
+
+inputs.forEach(inp=>{
+total += Number(inp.value || 0);
+});
+
+rows[i].cells[8].innerText = total;
+
+}
+
+saveData(show);
+
+}
+
 function deleteRow(btn){
-    let row = btn.parentElement.parentElement;
-    row.remove();
-    saveData();
+
+btn.parentElement.parentElement.remove();
+
+update(false);
+
 }
 
-/* UPDATE TOTAL */
-function update(){
+function saveData(show=true){
 
-    let rows = document.querySelectorAll("#table tr");
+let rows = document.querySelectorAll("#table tr");
 
-    for(let i=1;i<rows.length;i++){
+students = [];
 
-        let inputs = rows[i].querySelectorAll("input");
+for(let i=1;i<rows.length;i++){
 
-        let total = 0;
+let cells = rows[i].cells;
 
-        inputs.forEach(inp=>{
-            total += Number(inp.value || 0);
-        });
+let inputs = rows[i].querySelectorAll("input");
 
-        rows[i].cells[8].innerText = total;
-    }
+let marks = [];
+
+inputs.forEach(inp=>{
+marks.push(Number(inp.value || 0));
+});
+
+students.push({
+name:cells[0].innerText,
+sex:cells[1].innerText,
+marks:marks
+});
+
 }
 
-/* SAVE ALL DATA */
-function saveData(){
+localStorage.setItem(
+"cms_data",
+JSON.stringify(students)
+);
 
-    let rows = document.querySelectorAll("#table tr");
+if(show){
+alert("✅ Marks Saved Successfully");
+}
 
-    students = [];
-
-    for(let i=1;i<rows.length;i++){
-
-        let cells = rows[i].cells;
-
-        let name = cells[0].innerText;
-        let sex = cells[1].innerText;
-
-        let inputs = rows[i].querySelectorAll("input");
-
-        let marks = [];
-
-        inputs.forEach(inp=>{
-            marks.push(Number(inp.value || 0));
-        });
-
-        students.push({
-            name,
-            sex,
-            marks
-        });
-    }
-
-    localStorage.setItem("cms_data", JSON.stringify(students));
 }
 
 </script>
